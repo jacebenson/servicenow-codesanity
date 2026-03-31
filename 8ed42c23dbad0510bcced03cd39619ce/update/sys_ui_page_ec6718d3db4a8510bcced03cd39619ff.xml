@@ -171,6 +171,7 @@
 	&lt;ol&gt;&#13;
 		&lt;li&gt;Check "CodeSanity - Application names in code" now considers Script Includes named "CodeSanity" as exceptions - as the CodeSanity Extension Point Implementation Script Include contains application names by design.&lt;/li&gt;&#13;
 		&lt;li&gt;Check "CodeSanity - ATF tests for Flows" now considers Flows that act as triggers for AI Use Cases and AI Agents as exceptions.&lt;/li&gt;&#13;
+		&lt;li&gt;Check "CodeSanity - Sys IDs in scripts" now ignores scripts in sys_flow_trigger_auto_script records.&lt;/li&gt;&#13;
 	&lt;/ol&gt;&#13;
 &#13;
 &#13;
@@ -644,14 +645,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-03-10 09:51:04</sys_created_on>
         <sys_id>ec6718d3db4a8510bcced03cd39619ff</sys_id>
-        <sys_mod_count>468</sys_mod_count>
+        <sys_mod_count>469</sys_mod_count>
         <sys_name>manual</sys_name>
         <sys_package display_value="CodeSanity WORK IN PROGRESS" source="x_snc_codesanity">8ed42c23dbad0510bcced03cd39619ce</sys_package>
         <sys_policy/>
         <sys_scope display_value="CodeSanity WORK IN PROGRESS">8ed42c23dbad0510bcced03cd39619ce</sys_scope>
         <sys_update_name>sys_ui_page_ec6718d3db4a8510bcced03cd39619ff</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-03-18 14:52:51</sys_updated_on>
+        <sys_updated_on>2026-03-31 14:19:48</sys_updated_on>
     </sys_ui_page>
     <sys_es_latest_script action="INSERT_OR_UPDATE">
         <id>ec6718d3db4a8510bcced03cd39619ff</id>
