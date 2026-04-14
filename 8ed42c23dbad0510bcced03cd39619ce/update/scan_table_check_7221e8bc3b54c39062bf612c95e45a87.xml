@@ -12,7 +12,7 @@ With all that in mind, allowing users to select a new state from a drop-down in 
         <finding_type>scan_finding</finding_type>
         <name>CodeSanity - State field is read-only</name>
         <priority>1</priority>
-        <resolution_details>Add a dictionary override record for the derived table for the state field configuring the field to be read-only.</resolution_details>
+        <resolution_details>Add a dictionary override record for the derived table (with base table "task") for the "state" field configuring the field to be read-only.</resolution_details>
         <run_condition/>
         <score_max>100</score_max>
         <score_min>0</score_min>
@@ -30,7 +30,10 @@ With all that in mind, allowing users to select a new state from a drop-down in 
 				return;	
 			}
 
-			if (grDictOverride.read_only_override == false || grDictOverride.read_only == false)
+			if (
+				grDictOverride.read_only_override == false
+				|| grDictOverride.read_only == false
+				|| grDictOverride.base_table != 'task')
 			{
 				engine.finding.increment();
 				return;
@@ -44,14 +47,14 @@ With all that in mind, allowing users to select a new state from a drop-down in 
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-04-14 09:54:50</sys_created_on>
         <sys_id>7221e8bc3b54c39062bf612c95e45a87</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>CodeSanity - State field is read-only</sys_name>
         <sys_package display_value="CodeSanity WORK IN PROGRESS" source="x_snc_codesanity">8ed42c23dbad0510bcced03cd39619ce</sys_package>
         <sys_policy/>
         <sys_scope display_value="CodeSanity WORK IN PROGRESS">8ed42c23dbad0510bcced03cd39619ce</sys_scope>
         <sys_update_name>scan_table_check_7221e8bc3b54c39062bf612c95e45a87</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-04-14 13:13:49</sys_updated_on>
+        <sys_updated_on>2026-04-14 14:06:07</sys_updated_on>
         <table>sys_db_object</table>
         <use_manifest>false</use_manifest>
     </scan_table_check>

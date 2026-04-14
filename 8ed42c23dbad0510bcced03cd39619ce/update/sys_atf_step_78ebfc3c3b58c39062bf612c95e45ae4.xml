@@ -14,14 +14,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-04-14 11:45:05</sys_created_on>
         <sys_id>78ebfc3c3b58c39062bf612c95e45ae4</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>Run Server Side Script</sys_name>
         <sys_package display_value="CodeSanity WORK IN PROGRESS" source="x_snc_codesanity">8ed42c23dbad0510bcced03cd39619ce</sys_package>
         <sys_policy/>
         <sys_scope display_value="CodeSanity WORK IN PROGRESS">8ed42c23dbad0510bcced03cd39619ce</sys_scope>
         <sys_update_name>sys_atf_step_78ebfc3c3b58c39062bf612c95e45ae4</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-04-14 11:55:01</sys_updated_on>
+        <sys_updated_on>2026-04-14 14:09:19</sys_updated_on>
         <table/>
         <test display_value="CodeSanity - State field is read-only">6cebfc3c3b58c39062bf612c95e45a10</test>
         <timeout/>
@@ -50,9 +50,9 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-04-14 11:45:05</sys_created_on>
         <sys_id>b8ebfc3c3b58c39062bf612c95e45af5</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-04-14 11:55:01</sys_updated_on>
+        <sys_updated_on>2026-04-14 14:09:19</sys_updated_on>
         <value>(function(outputs, steps, stepResult, assertEqual)&#13;
 {&#13;
 	var test = new x_snc_devtools.TestAPI(outputs, steps, stepResult, assertEqual);&#13;
@@ -81,6 +81,7 @@
 		'sys_dictionary_override',&#13;
 		{&#13;
 			sys_scope: 'global',&#13;
+			base_table: 'task',&#13;
 			name: 'u_test_derived_from_task',&#13;
 			element: 'state'&#13;
 		},&#13;
