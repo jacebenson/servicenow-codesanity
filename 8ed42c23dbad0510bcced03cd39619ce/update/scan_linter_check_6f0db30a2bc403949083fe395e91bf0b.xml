@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_linter_check">
+    <scan_linter_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>code_sanity</category>
+        <description>By default the contents of user-provided parameters is returned in its raw form by Glide API functions. No checks or validation is applied through low-level API functions like RP.getParameterValue().&#13;
+Any user-provided data may be malicious and may contain payloads of attacks attempting to exploit vulnerabilities in downstream code.&#13;
+To reduce the likelihood of adding an exploitable vulnerability, every incomming parameter data should be checked.&#13;
+To achieve this, low-level API functions that return raw parameter values should not be used directly in the code. Instead the DevTools function GetParam() should be used.&#13;
+The GetParam() function accepts a validation function to be used to validate the parameter contents.</description>
+        <documentation_url/>
+        <finding_type>scan_finding</finding_type>
+        <name>CodeSanity - Check external parameters</name>
+        <priority>1</priority>
+        <resolution_details>Replace all direct use of low-level Glide API functions that return parameter values by using x_snc_devtools.GetParam() and provide a fit-for-purpose validation function.&#13;
+This includes replacing uses of "RP.getParameterValue", "gs.action.getGlideURI", "this.getParameter" (a typical pattern in client callable Script Includes) and "request.queryParams" (a typical pattern in scripted REST API endpoints).</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (engine) {
+
+	if (x_snc_codesanity.IsCheckApplicableToRecord())
+	{
+		var strSource = x_snc_devtools.GetStringValue(engine.rootNode.toSource());
+
+		var strTable = x_snc_devtools.GetStringValue(current.getRecordClassName());
+		var bException = false;
+
+		if (strTable == 'sys_script_include')
+		{
+			var strName = x_snc_devtools.GetStringValue(current.name);
+			if (strName == 'GetParam')
+			{
+				bException = true;
+			}
+			if (strName == 'GetCurrentUrl')
+			{
+				bException = true;
+			}
+		}
+
+		if (bException == false)
+		{
+			if (strSource.indexOf('RP.getParameterValue') != -1)
+			{
+				engine.finding.increment();
+			}
+
+			if (strSource.indexOf('gs.action.getGlideURI') != -1)
+			{
+				engine.finding.increment();
+			}
+
+			if (strSource.indexOf('this.getParameter') != -1)
+			{
+				engine.finding.increment();
+			}	
+
+			if (strSource.indexOf('request.queryParams') != -1)
+			{
+				engine.finding.increment();
+			}			
+		}
+	}
+
+})(engine);]]></script>
+        <short_description>Always validate external user-provided paramters</short_description>
+        <sys_class_name>scan_linter_check</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-06 12:55:03</sys_created_on>
+        <sys_id>6f0db30a2bc403949083fe395e91bf0b</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>CodeSanity - Check external parameters</sys_name>
+        <sys_package display_value="CodeSanity" source="x_snc_codesanity">8ed42c23dbad0510bcced03cd39619ce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CodeSanity">8ed42c23dbad0510bcced03cd39619ce</sys_scope>
+        <sys_update_name>scan_linter_check_6f0db30a2bc403949083fe395e91bf0b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-06 19:31:46</sys_updated_on>
+    </scan_linter_check>
+    <sys_translated_text action="delete_multiple" query="documentkey=6f0db30a2bc403949083fe395e91bf0b"/>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>6f0db30a2bc403949083fe395e91bf0b</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-06 12:55:02</sys_created_on>
+        <sys_id>5f2f334e2bc403949083fe395e91bfd3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-06 12:55:02</sys_updated_on>
+        <table>scan_linter_check</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

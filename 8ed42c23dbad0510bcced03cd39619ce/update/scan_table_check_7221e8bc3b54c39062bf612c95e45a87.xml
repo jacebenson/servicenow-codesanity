@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>true</advanced>
+        <category>code_sanity</category>
+        <conditions/>
+        <description>A custom table that is directly or indirectly derived from "task" must override the configuration of the "state" column to be read-only.&#13;
+A task derived table implements a process. A process is a sequence of activities and the state column should represent the different phases (or states) of a process.&#13;
+The transitions between the states should be designed and controlled. Not every state can transit into every other state - and for each state transition there should be defined conditions and access controls.&#13;
+With all that in mind, allowing users to select a new state from a drop-down in a form is not good UX. Hence the state field should be read-only and state transitions should be triggered through different user interactions or automatically based on changes in data or events.</description>
+        <documentation_url/>
+        <finding_type>scan_finding</finding_type>
+        <name>CodeSanity - State field is read-only</name>
+        <priority>1</priority>
+        <resolution_details>Add a dictionary override record for the derived table (with base table "task") for the "state" field configuring the field to be read-only.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (engine) {
+
+	if (x_snc_codesanity.IsCheckApplicableToRecord())
+	{
+		if (x_snc_devtools.IsDerivedFromTable(current.name,'task') == true)
+		{
+			var grDictOverride = x_snc_devtools.GetDictionaryOverrideRecord(current.name,'state');
+			if (x_snc_devtools.IsValidRecord(grDictOverride) == false)
+			{
+				engine.finding.increment();
+				return;	
+			}
+
+			if (
+				grDictOverride.read_only_override == false
+				|| grDictOverride.read_only == false
+				|| grDictOverride.base_table != 'task')
+			{
+				engine.finding.increment();
+				return;
+			}
+		}
+	}
+
+})(engine);]]></script>
+        <short_description>Custom task tables set state to read-only</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-14 09:54:50</sys_created_on>
+        <sys_id>7221e8bc3b54c39062bf612c95e45a87</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>CodeSanity - State field is read-only</sys_name>
+        <sys_package display_value="CodeSanity" source="x_snc_codesanity">8ed42c23dbad0510bcced03cd39619ce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CodeSanity">8ed42c23dbad0510bcced03cd39619ce</sys_scope>
+        <sys_update_name>scan_table_check_7221e8bc3b54c39062bf612c95e45a87</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-15 07:14:56</sys_updated_on>
+        <table>sys_db_object</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_translated_text action="delete_multiple" query="documentkey=7221e8bc3b54c39062bf612c95e45a87"/>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>7221e8bc3b54c39062bf612c95e45a87</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-14 09:54:49</sys_created_on>
+        <sys_id>a9a2acbc3b54c39062bf612c95e45a57</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-14 09:54:49</sys_updated_on>
+        <table>scan_table_check</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>
