@@ -26,13 +26,25 @@ This guidance is implemented by ensuring that a Tool is only wired to one Agent 
 			return;
 		}
 
+		var nCustomToolCount = 0;
+
 		var grAgentTool = new GlideRecord('sn_aia_agent_tool_m2m');
 		grAgentTool.addQuery('tool',current.tool);
 		grAgentTool.query();
-		if (grAgentTool.getRowCount() > 1)
+		while (grAgentTool.next() == true)
+		{
+			var grTool = x_snc_devtools.GetRecord('sn_aia_tool',grAgentTool.tool);
+			if (x_snc_devtools.IsValidRecord(grTool) == true)
+			{
+				if (x_snc_devtools.IsOotbRecord(grTool) == false)
+				{
+					nCustomToolCount++;
+				}
+			}
+		}
+		if (nCustomToolCount > 1)
 		{
 			engine.finding.increment();
-			return;
 		}
 	}
 
@@ -42,14 +54,14 @@ This guidance is implemented by ensuring that a Tool is only wired to one Agent 
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-03-04 11:01:37</sys_created_on>
         <sys_id>7178e5a73b1f3a1062bf612c95e45ad1</sys_id>
-        <sys_mod_count>9</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_name>CodeSanity - AI Agent Tool Structure</sys_name>
         <sys_package display_value="CodeSanity WORK IN PROGRESS" source="x_snc_codesanity">8ed42c23dbad0510bcced03cd39619ce</sys_package>
         <sys_policy/>
         <sys_scope display_value="CodeSanity WORK IN PROGRESS">8ed42c23dbad0510bcced03cd39619ce</sys_scope>
         <sys_update_name>scan_table_check_7178e5a73b1f3a1062bf612c95e45ad1</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-04-17 14:10:16</sys_updated_on>
+        <sys_updated_on>2026-04-17 15:38:05</sys_updated_on>
         <table>sn_aia_agent_tool_m2m</table>
         <use_manifest>false</use_manifest>
     </scan_table_check>
