@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_linter_check">
+    <scan_linter_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>code_sanity</category>
+        <description>The JSON.parse() function throws an exception in case the given parameter is not a valid JSON string. Throwing exceptions outside a module's scope is a bad practice and often leads to unhandled exceptions with unpredicatble results.</description>
+        <documentation_url/>
+        <finding_type>scan_finding</finding_type>
+        <name>CodeSanity - Avoid JSON.parse()</name>
+        <priority>1</priority>
+        <resolution_details>The DevTools function ParseJson() encapsulates JSON.parse() and catches exceptions if thrown. In that case, the function returns false.&#13;
+Refactor the code to use ParseJson() instead of JSON.parse().</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (engine) {
+
+	if (x_snc_codesanity.IsCheckApplicableToRecord())
+	{
+		var strSource = x_snc_devtools.GetStringValue(engine.rootNode.toSource());
+		strSource = x_snc_devtools.ScriptRemoveComments(strSource);
+
+		var strTable = x_snc_devtools.GetStringValue(current.getRecordClassName());
+		var bException = false;
+
+		if (strTable == 'sys_script_include')
+		{
+			var strName = x_snc_devtools.GetStringValue(current.name);
+			if (strName == 'ParseJson')
+			{
+				bException = true;
+			}
+		}
+
+		if (bException == false)
+		{
+			if (strSource.indexOf('JSON.parse') != -1)
+			{
+				engine.finding.increment();
+			}			
+		}
+	}
+
+})(engine);]]></script>
+        <short_description>Do not use JSON.parse() directly</short_description>
+        <sys_class_name>scan_linter_check</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-05-04 12:54:43</sys_created_on>
+        <sys_id>543a44973ba4c3d462bf612c95e45a8d</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>CodeSanity - Avoid JSON.parse()</sys_name>
+        <sys_package display_value="CodeSanity WORK IN PROGRESS" source="x_snc_codesanity">8ed42c23dbad0510bcced03cd39619ce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CodeSanity WORK IN PROGRESS">8ed42c23dbad0510bcced03cd39619ce</sys_scope>
+        <sys_update_name>scan_linter_check_543a44973ba4c3d462bf612c95e45a8d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-05-04 12:58:22</sys_updated_on>
+    </scan_linter_check>
+    <sys_translated_text action="delete_multiple" query="documentkey=543a44973ba4c3d462bf612c95e45a8d"/>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>543a44973ba4c3d462bf612c95e45a8d</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-05-04 12:54:42</sys_created_on>
+        <sys_id>eb9b885b3ba4c3d462bf612c95e45aa8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-05-04 12:54:42</sys_updated_on>
+        <table>scan_linter_check</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>
