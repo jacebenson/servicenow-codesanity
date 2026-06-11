@@ -5,8 +5,8 @@
         <category>code_sanity</category>
         <conditions/>
         <description>A REST API Resource (Operation) must require authentication and ACL authorization. This implicitly inherits the access control specified by the REST API or requires the specification of a Resource specific ACL.&#13;
-This is to avoid security issues like the one documented in KB TODO.</description>
-        <documentation_url/>
+This is to avoid security issues like the one documented in KB3067321.</description>
+        <documentation_url>https://support.servicenow.com/kb?id=kb_article_view&amp;sysparm_article=KB3067321</documentation_url>
         <finding_type>scan_finding</finding_type>
         <name>CodeSanity - REST API Resource Authentication</name>
         <priority>1</priority>
@@ -31,14 +31,14 @@ This is to avoid security issues like the one documented in KB TODO.</descriptio
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-06-11 05:14:53</sys_created_on>
         <sys_id>85ed4a5fc35103944b4f311f050131e1</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>CodeSanity - REST API Resource Authentication</sys_name>
         <sys_package display_value="CodeSanity WORK IN PROGRESS" source="x_snc_codesanity">8ed42c23dbad0510bcced03cd39619ce</sys_package>
         <sys_policy/>
         <sys_scope display_value="CodeSanity WORK IN PROGRESS">8ed42c23dbad0510bcced03cd39619ce</sys_scope>
         <sys_update_name>scan_table_check_85ed4a5fc35103944b4f311f050131e1</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-06-11 05:19:47</sys_updated_on>
+        <sys_updated_on>2026-06-11 07:36:27</sys_updated_on>
         <table>sys_ws_operation</table>
         <use_manifest>false</use_manifest>
     </scan_table_check>
