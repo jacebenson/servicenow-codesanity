@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>true</advanced>
+        <category>code_sanity</category>
+        <conditions/>
+        <description>A REST API Resource (Operation) must require authentication and ACL authorization. This implicitly inherits the access control specified by the REST API or requires the specification of a Resource specific ACL.&#13;
+This is to avoid security issues like the one documented in KB3067321.</description>
+        <documentation_url>https://support.servicenow.com/kb?id=kb_article_view&amp;sysparm_article=KB3067321</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>CodeSanity - REST API Resource Authentication</name>
+        <priority>1</priority>
+        <resolution_details>Set the checkboxes to require authentication and ACL authorization. Leave the ACLs field blank to inherit security control from the REST API or specify an ACL specific for the REST API Resource (Operation) if a different access control is required.  </resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (engine) {
+
+	if (x_snc_codesanity.IsCheckApplicableToRecord())
+	{
+		if (current.requires_authentication == false || current.requires_acl_authorization == false)
+		{
+			engine.finding.increment();
+		}
+	}
+
+})(engine);]]></script>
+        <short_description>A REST API Resource must require authentication and ACL authorization</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-06-11 05:14:53</sys_created_on>
+        <sys_id>85ed4a5fc35103944b4f311f050131e1</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>CodeSanity - REST API Resource Authentication</sys_name>
+        <sys_package display_value="CodeSanity" source="x_snc_codesanity">8ed42c23dbad0510bcced03cd39619ce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CodeSanity">8ed42c23dbad0510bcced03cd39619ce</sys_scope>
+        <sys_update_name>scan_table_check_85ed4a5fc35103944b4f311f050131e1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-06-11 07:36:27</sys_updated_on>
+        <table>sys_ws_operation</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_translated_text action="delete_multiple" query="documentkey=85ed4a5fc35103944b4f311f050131e1"/>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>85ed4a5fc35103944b4f311f050131e1</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-06-11 05:14:52</sys_created_on>
+        <sys_id>96ce0213c39103944b4f311f050131ae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-06-11 05:14:52</sys_updated_on>
+        <table>scan_table_check</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>
